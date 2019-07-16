@@ -26,3 +26,16 @@ $ npm audit fix
 ------------------------------
 
 Change the var's to const because we do not want to modify those 
+
+initialize git repository
+
+created gitignore and added node_modules and .env to it. We do this because package.json already has all the information we need. Node modules will always be automatically created when pulled from someplace else. .env needs to be private as it will contain sensitive information. 
+
+RESTful routes for posts.js
+GET index           /posts
+GET new             /posts/new
+POST create         /posts
+GET show            /posts/:id
+GET edit            /posts/:id/edit
+PUT update          /posts/:id
+DELETE destroy      /posts/:id
