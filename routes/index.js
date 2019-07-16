@@ -36,7 +36,7 @@ router.put('/profile/:user_id', (req, res, next) => {
   res.send('PUT /profile/:user_id');
 });
 
-/* GET /forgot-pw home page. */
+/* GET /forgot home page. */
 router.get('/forgot', (req, res, next) => {
   res.send('GET /forgot');
 });
@@ -44,17 +44,17 @@ router.get('/forgot', (req, res, next) => {
 // :id won't be necessary because the user would be typing in a 
 // unique email. We will use that email to look up that specific 
 // user. 
-/* PUT /forgot-pw home page. */
+/* PUT /forgot home page. */
 router.put('/forgot', (req, res, next) => {
   res.send('PUT /forgot');
 });
 
-/* GET /reset-pw home page. */
+/* GET /reset/:token home page. */
 router.get('/reset/:token', (req, res, next) => {
   res.send('GET /reset/:token');
 });
 
-/* PUT /reset-pw home page. */
+/* PUT /reset/:token home page. */
 router.put('/reset-pw/:token', (req, res, next) => {
   res.send('PUT /reset/:token');
 });
