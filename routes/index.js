@@ -1,5 +1,16 @@
 const express = require('express');
 const router = express.Router();
+//Object destructuring
+//plug in the method you want to destruct out of the object
+//when we require controllers/index it exports the object from module
+//exports and we can pull any of the keys from that object.
+//--- (es6 destructuring format)
+const {postRegister} = require('../controllers/index');
+    //an equivalent to ^^^^ that takes two lines
+    //const indexObj = require('../controllers/index');
+    //const postRegister = indexObj.postRegister;
+
+
 
 // index.js uses es6 formatting 
 //The index.js will allow users to sign up or login
@@ -15,9 +26,8 @@ router.get('/register', (req, res, next) => {
 });
 
 /* POST /register home page. */
-router.post('/register', (req, res, next) => {
-  res.send('POST /register');
-});
+//postRegister has access to req, res, and next (look at code)
+router.post('/register', postRegister);
 
 /* POST /login home page. */
 router.post('/login', (req, res, next) => {

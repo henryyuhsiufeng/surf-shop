@@ -1,10 +1,17 @@
 # surf-shop
 
-6/15/19
-MVC - (M)odels (V)iews (C)ontrollers
-Express application generator
+6/16/19
 
-6/15/19
+create index.js in controllers. This file will coincide with the index.js file in models.
+
+check if controllers was connected to index.js in routes
+
+------Terminal Commands------
+//Update mongoose to version 5.6.4
+npm uninstall mongoose ; npm i -S mongoose@5.6.4
+
+
+6/16/19
 ------Terminal Commands------
 
 $ npm install -g express-generator
@@ -46,3 +53,7 @@ DELETE destroy      /posts/:id
 !!! index.js will contain es6 formatting 
 
 index.js will contain the following features: login and sign up. 
+
+6/15/19
+MVC - (M)odels (V)iews (C)ontrollers
+Express application generator
