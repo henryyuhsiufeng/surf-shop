@@ -30,9 +30,22 @@ router.get('/register', (req, res, next) => {
 //postRegister has access to req, res, and next (look at code)
 router.post('/register', errorHandler(postRegister));
 
-/* POST /login home page. */
-router.post('/login', passport.authenticate('local') ,(req, res, next) => {
+/* GET /login */
+router.get('/login', (req, res, next) => {
   res.send('GET /login');
+});
+
+/* POST /login home page. */
+router.post('/login', passport.authenticate('local', 
+                { successRedirect: '/',
+                failureRedirect: '/login',
+               // failureFlash: true 
+  }));
+
+/* GET /logout */
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
 });
 
 //Displays user profile information
