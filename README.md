@@ -6,6 +6,9 @@ create index.js in controllers. This file will coincide with the index.js file i
 
 check if controllers was connected to index.js in routes
 
+encountered error: <strong>passport.initialize() middleware</strong>
+while adding in authenticate middleware to post login route
+
 ------Terminal Commands------
 //Update mongoose to version 5.6.4
 npm uninstall mongoose ; npm i -S mongoose@5.6.4
