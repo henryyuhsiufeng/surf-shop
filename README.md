@@ -1,4 +1,9 @@
 # surf-shop
+6/21/19
+create basic template for post and edit ejs
+
+------Terminal Commands------
+npm i -S method-override
 
 6/16/19
 

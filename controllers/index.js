@@ -1,9 +1,11 @@
 const User = require('../models/user');
+const passport = require('passport');
 
 //anything inside this object will be exported
 module.exports = {
     //create a method that we can use with post register route in user index
     //this is a method of this parent object
+    //POST /register
     async postRegister(req, res, next) {
         const newUser = new User({
             username: req.body.username,
@@ -19,7 +21,22 @@ module.exports = {
         //of (await is only valid in async function)
         await User.register(newUser, req.body.password);
         res.redirect('/');
-    }
+    },
+
+    //POST /login
+    postLogin(req, res, next){
+        passport.authenticate('local', 
+                { successRedirect: '/',
+                failureRedirect: '/login',
+               // failureFlash: true 
+        })(req, res, next);
+    },
+
+    // GET /logout
+    getLogout(req, res, next) {
+        req.logout();
+        res.redirect('/');
+      }
 
 }
 

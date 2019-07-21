@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 //Object destructuring
 //plug in the method you want to destruct out of the object
 //when we require controllers/index it exports the object from module
 //exports and we can pull any of the keys from that object.
 //--- (es6 destructuring format)
-const {postRegister} = require('../controllers/index');
+const {postRegister, postLogin, getLogout} = require('../controllers/index');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
@@ -36,17 +35,10 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST /login home page. */
-router.post('/login', passport.authenticate('local', 
-                { successRedirect: '/',
-                failureRedirect: '/login',
-               // failureFlash: true 
-  }));
+router.post('/login', postLogin);
 
 /* GET /logout */
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
-});
+router.get('/logout', getLogout);
 
 //Displays user profile information
 /* GET /profile home page. */

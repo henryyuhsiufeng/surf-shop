@@ -7,7 +7,8 @@ const createError             = require('http-errors'),
       passport                = require('passport'),
       User                    = require('./models/user'),
       session                 = require('express-session'),
-      mongoose                = require('mongoose');
+      mongoose                = require('mongoose'),
+      methodOverride          = require('method-override');
 
 
       
@@ -38,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 // session has to come before you configure passport
 // Configure Passport and Sessions

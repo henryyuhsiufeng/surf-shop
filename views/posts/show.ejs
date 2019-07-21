@@ -1,0 +1,27 @@
+<h1><%= post.title %></h1>
+<div>Price: <%= post.price %></div>
+<div><%= post.description %></div>
+<div><%= post.location %></div>
+<div><a href="/posts/<%= post.id%>/edit">Edit post</a></div>
+
+<!--
+    title: String,
+    price: String,
+    description: String,
+    images: [String],
+    location: String,
+    lat: Number,
+    lng: Number,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    reviews: [
+        {
+            // because we use mongoose.Schema we don't have to use it 
+            // at the top. 
+            type: Schema.Types.ObjectId,
+            ref: 'Review'
+        }
+    ]
+-->
