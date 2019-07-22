@@ -21,9 +21,9 @@ module.exports = {
     // Posts Create
     async postCreate(req, res, next){
         // use req.body to create a new Post
-        let post = await Post.create(req.body);
+        let post = await Post.create(req.body.post);
         // use backtick to allow js template literal syntax 
-        res.redirect(`/posts/${post.id}`)
+        res.redirect(`/posts/${post.id}`);
     },
     //Post Show
     async postShow(req, res, next) {
@@ -34,6 +34,19 @@ module.exports = {
     async postEdit(req, res, next){
         let post = await Post.findById(req.params.id);
         res.render('posts/edit', {  post });
+    },
+    // Posts Update
+    // take information from the put request in the edit form, then we will find
+    // the post by its id and update it, then redirect. 
+    async postUpdate(req, res, next){
+        //update it with req.body.post
+        // let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, {new: true});
+        // ^^^ {new: true} argument will return the newly updated psot from the databse, instead
+        // of the original
+        let post = await Post.findByIdAndUpdate(req.params.id, req.body.post);
+        //we can just plug in req.params.findbyid instead
+        // eval(require('locus'));
+        res.redirect(`/posts/${post.id}`);
     }
 
     
