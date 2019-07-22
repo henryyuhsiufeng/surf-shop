@@ -9,7 +9,7 @@ const {postRegister, postLogin, getLogout} = require('../controllers/index');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
-const { errorHandler } = require('../middleware');
+const { asyncErrorHandler } = require('../middleware');
 
 
 // index.js uses es6 formatting 
@@ -27,7 +27,7 @@ router.get('/register', (req, res, next) => {
 
 /* POST /register home page. */
 //postRegister has access to req, res, and next (look at code)
-router.post('/register', errorHandler(postRegister));
+router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET /login */
 router.get('/login', (req, res, next) => {

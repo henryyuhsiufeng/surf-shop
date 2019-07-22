@@ -1,4 +1,9 @@
 # surf-shop
+6/22/19 
+refactor post.js in routes. Changed the method names to better
+follow restful routing.
+
+
 6/21/19
 create basic template for post and edit ejs
 

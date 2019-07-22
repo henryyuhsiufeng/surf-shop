@@ -1,5 +1,5 @@
 module.exports = {
-    errorHandler: (fn) =>
+    asyncErrorHandler: (fn) =>
         //callback anonymous function 
 		(req, res, next) => {
 			Promise.resolve(fn(req, res, next))
