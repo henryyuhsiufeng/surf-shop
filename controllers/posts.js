@@ -26,15 +26,24 @@ module.exports = {
     },
     // Posts Create
     async postCreate(req, res, next){
+        // array
+        req.body.post.images = [];
         //req.files is going to be the array of files.
         for(const file of req.files) {
             // this method returns a promise
             // if we await it, we can get whatever the promise resolves to, so 
             // we can assign whatever it is to a variable. We then will store the info
-            // stored in variable image
+            // stored in variable imagE. 
            let image = await cloudinary.v2.uploader.upload(file.path);
+           // After we get back each images from out uploads to cloudinary let's
+           // create an object and store it within req.body.post.images
+           req.body.post.images.push({
+               url: image.secure_url,
+               public_id: image.public_id
+           });
         }
         // use req.body to create a new Post
+        // req.body.post will now also contain req.body.post.images
         let post = await Post.create(req.body.post);
         // use backtick to allow js template literal syntax 
         res.redirect(`/posts/${post.id}`);
