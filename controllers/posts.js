@@ -1,4 +1,10 @@
 const Post = require('../models/post');
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dkulk3gvx',
+    api_key: '859914662181975',
+    api_secret: process.env.CLOUDINARY_SECRET
+});
 
 module.exports = {
     // Post Index

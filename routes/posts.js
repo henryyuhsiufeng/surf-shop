@@ -22,7 +22,12 @@ router.get('/', asyncErrorHandler(postIndex));
 router.get('/new', postNew);
   
 /* POST posts create index /posts */
-router.post('/', asyncErrorHandler(postCreate));
+// the upload.array this a method that takes two arguments. First one is the
+// name of the input that is going to have the files coming from the form. The 
+// Second number indicates the max number of images a user can upload. Now, when
+// we get to the postCreate method we have access to the files that were uploaded 
+// from the form via a req.files object returned from the array() method. 
+router.post('/', upload.array('images', 4), asyncErrorHandler(postCreate));
 
 /* GET posts show /posts/:id */
 router.get('/:id', asyncErrorHandler(postShow));
