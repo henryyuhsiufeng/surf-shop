@@ -47,6 +47,11 @@ module.exports = {
         //we can just plug in req.params.findbyid instead
         // eval(require('locus'));
         res.redirect(`/posts/${post.id}`);
+    },
+    // Post Destroy
+    async postDestroy(req, res, next){
+        await Post.findByIdAndRemove(req.params.id);
+        res.redirect('/posts');
     }
 
     
