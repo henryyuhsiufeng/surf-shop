@@ -2,7 +2,16 @@
 6/23/19
 Add delete method to post. 
 
-cloudinary allows us to store images in the cloud.
+cloudinary allows us to store images in the cloud. Multer is going to allow us to deal with the multipart form data (one or more diff file types).
+
+We pass in req.body.post to create a new post. But we can't simply do that with images because it is an array.
+
+have to download package dotenv to use .env file
+- npm i -D dotenv
+
+can export the environment variable for a session with
+export CLOUDINARY_SECRET = asdfasdfasdfasdf
+
 ------------------------------------
 Image upload
 
