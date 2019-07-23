@@ -5,7 +5,10 @@ const PostSchema = new Schema({
     title: String,
     price: String,
     description: String,
-    images: [String],
+    // url and public_id are coming from cloudinary. The public_id 
+    // allows us to edit or delete that image from cloudinary. The url
+    // is going to allow us to easily display images in views and ejs.
+    images: [ {url: String, public_id: String}],
     location: String,
     lat: Number,
     lng: Number,
