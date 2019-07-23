@@ -1,4 +1,30 @@
 # surf-shop
+6/23/19
+Add delete method to post. 
+
+cloudinary allows us to store images in the cloud.
+------------------------------------
+Image upload
+
+- Create cloudinary account
+- Activate account from email (very important!)
+- Install cloudinary and multer
+    'npm i -S cloudinary multer'
+- Configure multer for upload in routes file (add image filter?)
+    - add middleware -> upload.array('nameAttr', maxNum)
+- Update new view form element with enctype='multipart/form-data'
+- Add input to form -> attrs: type='file', name='images', accept='images/*', multiple
+- Require cloudinary in controller
+- Configure cloudinary (put api_secret in .env)
+- Add for... of loop with cloudinary upload
+- Update Post mode, images field to [{url: String. public_id: String}]
+- Test it out!
+
+------------------------------------
+
+- Rubber duck debugging method
+
+
 6/22/19 
 refactor post.js in routes. Changed the method names to better
 follow restful routing.

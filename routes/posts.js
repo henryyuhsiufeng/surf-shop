@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { asyncErrorHandler } = require('../middleware');
+const multer = require('multer');
+// uploads directory is where the files will be stored temporarily before
+// they get uploaded into the cloud and stored into the database
+const upload = multer({'dest': 'uploads/'});
 const { postIndex, 
         postNew, 
         postCreate,
