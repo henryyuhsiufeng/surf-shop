@@ -4,15 +4,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     email: String,
-    image: String,
-    posts: [
-        {
-            // because we use mongoose.Schema we don't have to use it 
-            // at the top. 
-            type: Schema.Types.ObjectId,
-            ref: 'Post'
-        }
-    ]
+    image: String
 });
 
 UserSchema.plugin(passportLocalMongoose);
@@ -28,4 +20,15 @@ User
 -profilePic - String
 -Posts -Array of objects ref posts 
 -reviews -Array of objects ref reviews
+
+posts: [
+        {
+            // because we use mongoose.Schema we don't have to use it 
+            // at the top. 
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
+
 */
+
