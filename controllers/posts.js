@@ -62,7 +62,12 @@ module.exports = {
     // take information from the put request in the edit form, then we will find
     // the post by its id and update it, then redirect. 
     async postUpdate(req, res, next){
-        //update it with req.body.post
+        // handle any deletion of existing images
+        // handle upload of any new images. We need to determine the current amount of
+         // images that a post already has. 
+        
+
+        // update it with req.body.post
         // let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, {new: true});
         // ^^^ {new: true} argument will return the newly updated psot from the databse, instead
         // of the original
