@@ -12,6 +12,19 @@
     <div>
          <input type="text" name="post[price]" placeholder="Price" value="<%= post.price%>">
     </div>
+     <div>
+        <!--name is from the router so it matches
+            multiple is like the require attribute
+            It is going to allow users to click on images
+            from the little pop up
+        -->
+        <input type="file" accept="images/*" name="images" multiple />
+            <div>
+                <% post.images.forEach(function(image){ %>
+                    <img src="<%= image.url %>" width="100px"/>
+                <% }); %>
+            </div>
+    </div>
     <div>
          <textarea name="post[description]"  placeholder="Description">
             <%= post.description%>
