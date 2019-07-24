@@ -1,4 +1,11 @@
 # surf-shop
+6/24/19
+What is req.files???
+What is W3 spec???
+
+(Planning)
+Working on trying to be able to edit images. Being able to see the images that are already existing in the edit page. We want to get the images under choose files and be able to select which ones to edit. We only want a post to have a maximum of four images at any given time.
+
 6/23/19
 Add delete method to post. 
 
