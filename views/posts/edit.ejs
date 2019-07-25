@@ -1,7 +1,7 @@
 <h1>Edit Post</h1>
 
 <!--Method Override-->
-<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm">
+<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
     <div>
          <!--will not parse post[title] because in app.js 
              the bodyParser.urlendcoded... extended is set to false.
@@ -25,7 +25,7 @@
                     <label for="image<%= i %>">Delete?</label>
                     <!--image.public_id is what we are going to use to delete it from
                     cloudinary and from post.images array using name-->
-                    <input type="checkbox" name="deleteImage" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
+                    <input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
                 <% }); %>
             </div>
     </div>
