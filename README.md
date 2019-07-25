@@ -35,6 +35,20 @@ included ternary operator in script in edit.ejs in posts
 
 bodyParser syntax name="deleteImages[]" will create an array even if theres one item.
 
+line duplicate down (shift + option + down arrow key)
+
+Delete posts and making sure that the images associated with the deleted post are removed on cloudinary as well.
+
+old code:
+     // update it with req.body.post
+        // let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, {new: true});
+        // ^^^ {new: true} argument will return the newly updated psot from the databse, instead
+        // of the original
+        let post = await Post.findByIdAndUpdate(req.params.id, req.body.post);
+        //we can just plug in req.params.findbyid instead
+        // eval(require('locus'));
+        res.redirect(`/posts/${post.id}`);
+
 6/24/19
 What is req.files???
 What is W3 spec???
