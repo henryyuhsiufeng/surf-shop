@@ -1,7 +1,7 @@
 <h1>Edit Post</h1>
 
 <!--Method Override-->
-<form action="/posts/<%= post.id %>?_method=PUT" method="POST">
+<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm">
     <div>
          <!--will not parse post[title] because in app.js 
              the bodyParser.urlendcoded... extended is set to false.
@@ -18,10 +18,14 @@
             It is going to allow users to click on images
             from the little pop up
         -->
-        <input type="file" accept="images/*" name="images" multiple />
+        <input type="file" id="imageUpload" accept="images/*" name="images" multiple />
             <div>
-                <% post.images.forEach(function(image){ %>
+                <% post.images.forEach(function(image, i){ %>
                     <img src="<%= image.url %>" width="100px"/>
+                    <label for="image<%= i %>">Delete?</label>
+                    <!--image.public_id is what we are going to use to delete it from
+                    cloudinary and from post.images array using name-->
+                    <input type="checkbox" name="deleteImage" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
                 <% }); %>
             </div>
     </div>
@@ -37,3 +41,28 @@
    
     <input type="submit">
 </form>
+
+<script>
+    // find post edit form
+    let postEditForm = document.getElementById('postEditForm');
+    // add submit listener to post edit form
+    postEditForm.addEventListener('submit', function(event) {
+        // find length of uploaded images
+        let imageUploads = document.getElementById('imageUpload').files.length;
+        //imageUpload.file.length;
+        // find total number of existing images
+        let existingImgs = document.querySelectorAll('imageDeleteCheckbox').length;
+        // find total number of potential deletions
+        let imgDeleteions = document.querySelectorAll('.imageDeleteCheckbox:checked').length;
+        // figure out if the form can be submitted or not
+        let newTotal = existingImgs - imgDeleteions + imageUploads;
+        if( newTotal > 4) {
+            event.preventDefault();
+            let removalAmt = newTotal - 4;
+            alert(`You need to remove at least ${removalAmt} image${removalAmt === 1 ? '' : 's'}!`);
+        }
+   });
+    
+
+
+</script>
