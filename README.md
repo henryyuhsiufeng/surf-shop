@@ -11,6 +11,30 @@ Can use debugger code to stop process at a specific point
 included ternary operator in script in edit.ejs in posts
     - IF TRUE ? THEN DO X : ELSE(FALSE) DO Y
 
+    To do:
+    # Posts Edit form
+        - update checkbox name
+        - add enctype to form
+
+    # Posts Update Route
+        - add upload.array()
+    
+    # Posts Update Method
+        - Find the post by id
+        - Check if there's any images for deletion
+            - assign deleteImages from req.body to its own variable
+            - Loop over deleteImages
+                - Delete images from cloudinary
+                - delete image from post.images
+            - Check if there are any new images for upload
+                - upload images
+                    - add images to post.images array
+            - update the post with new any new properties
+            - save the updated post into the db
+            - redirect to show page
+
+bodyParser syntax name="deleteImages[]" will create an array even if theres one item.
+
 6/24/19
 What is req.files???
 What is W3 spec???
