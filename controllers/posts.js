@@ -62,16 +62,35 @@ module.exports = {
     // take information from the put request in the edit form, then we will find
     // the post by its id and update it, then redirect. 
     async postUpdate(req, res, next){
-        // handle any deletion of existing images
-        // handle upload of any new images. We need to determine the current amount of
-         // images that a post already has. 
-        
+        // Find the post by id
+        let post = await Post.findById(req.params.id);
+        // Check if there's any images for deletion
+        //check if deleteImages exist and if length is 0 because 0 is falsey
+        if(req.body.deleteImages && req.body.deleteImages.length) {
+            // assign deleteImages from req.body to its own variable to make it easier to pass around
+            let deleteImages = req.body.deleteImages;
+            // Loop over deleteImages
+            for(const public_id of deleteImages) {
+                // Delete images from cloudinary
+                await cloudinary.v2.uploader.destroy(public_id);
+                // delete image from post.images
+                for(const image of post.images) {
+                    if(image.public_id === public_id) {
+                        let index = post.images.indexOf(image);
+                        post.images.splice(index,1);
+                    }
+                }
+            }
+        }
+           
+            // Check if there are any new images for upload
+                // upload images
+                    // add images to post.images array
+            // update the post with new any new properties
+            // save the updated post into the db
+            // redirect to show page
 
-        // update it with req.body.post
-        // let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, {new: true});
-        // ^^^ {new: true} argument will return the newly updated psot from the databse, instead
-        // of the original
-        let post = await Post.findByIdAndUpdate(req.params.id, req.body.post);
+
         //we can just plug in req.params.findbyid instead
         // eval(require('locus'));
         res.redirect(`/posts/${post.id}`);
