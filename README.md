@@ -1,10 +1,26 @@
 # surf-shop
+6/25/19
+to acquire the number of pre-existing images. 
+    - let imageUpload = document.getElementById('imageUpload');
+    - imageUpload.files.length will get you the number of images
+    - let imgs = document.querySelectorAll('.imageDeleteCheckbox');
+    - imgs.length
+
+Can use debugger code to stop process at a specific point
+
+included ternary operator in script in edit.ejs in posts
+    - IF TRUE ? THEN DO X : ELSE(FALSE) DO Y
+
 6/24/19
 What is req.files???
 What is W3 spec???
 
 (Planning)
 Working on trying to be able to edit images. Being able to see the images that are already existing in the edit page. We want to get the images under choose files and be able to select which ones to edit. We only want a post to have a maximum of four images at any given time.
+
+When the form is submitted, we are going to check to see how many images were uploaded and we are going to compare to how many images already exist and how many they want to delete.
+
+In edit.ejs I gave the input image upload an id of "imageUpload" that way we can select that and see how many images a user is trying to upload. Add a checkbox to see what images the user wants to keep and delete. 
 
 6/23/19
 Add delete method to post. 
