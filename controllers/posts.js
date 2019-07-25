@@ -77,23 +77,39 @@ module.exports = {
                 for(const image of post.images) {
                     if(image.public_id === public_id) {
                         let index = post.images.indexOf(image);
+                        // we splice it because the order in which
+                        // an image is selected for deletion could be
+                        // random
                         post.images.splice(index,1);
                     }
                 }
             }
         }
-           
-            // Check if there are any new images for upload
+        // Check if there are any new images for upload
+            if(req.files) {
                 // upload images
-                    // add images to post.images array
-            // update the post with new any new properties
+                for(const file of req.files) {
+                    let image = await cloudinary.v2.uploader.upload(file.path);
+                    // remember we have access to post because we found post at the very beginning of the method
+                     // add images to post.images array
+                    post.images.push({
+                        url: image.secure_url,
+                        public_id: image.public_id
+                    });
+                }
+            }
+ 
+            // update the post with new any new properties coming from the form
+            post.title = req.body.post.title;
+            post.description = req.body.post.description;
+            post.price = req.body.post.price;
+            post.location = req.body.post.location;
             // save the updated post into the db
+            post.save();
             // redirect to show page
-
-
-        //we can just plug in req.params.findbyid instead
-        // eval(require('locus'));
-        res.redirect(`/posts/${post.id}`);
+            //we can just plug in req.params.findbyid instead
+            // eval(require('locus'));
+            res.redirect(`/posts/${post.id}`);
     },
     // Post Destroy
     async postDestroy(req, res, next){
