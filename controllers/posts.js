@@ -65,8 +65,9 @@ module.exports = {
         // Find the post by id
         let post = await Post.findById(req.params.id);
         // Check if there's any images for deletion
-        //check if deleteImages exist and if length is 0 because 0 is falsey
+        //check if deleteImages exist and if length is 0 (because 0 is falsey)
         if(req.body.deleteImages && req.body.deleteImages.length) {
+            //eval(require('locus'));
             // assign deleteImages from req.body to its own variable to make it easier to pass around
             let deleteImages = req.body.deleteImages;
             // Loop over deleteImages
@@ -86,6 +87,7 @@ module.exports = {
             }
         }
         // Check if there are any new images for upload
+        // we get req.files through multr after user hits submit on the form
             if(req.files) {
                 // upload images
                 for(const file of req.files) {
@@ -113,7 +115,13 @@ module.exports = {
     },
     // Post Destroy
     async postDestroy(req, res, next){
-        await Post.findByIdAndRemove(req.params.id);
+        let post = await Post.findByIdAndRemove(req.params.id);
+        // iterate over post.images and extract the public id
+        // image represents each of the objects in post.images array.
+        for(const image of post.images) {
+            await cloudinary.v2.uploader.destroy(image.public_id);
+        }
+        await post.remove();
         res.redirect('/posts');
     }
 

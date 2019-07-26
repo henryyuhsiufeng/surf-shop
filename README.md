@@ -1,6 +1,7 @@
 # surf-shop
 6/26/19
 Adding posts - Images Upload - Delete
+We have the deletion process to delete the posts, but does not delete the images in Cloudinary.
 
 6/25/19
 to acquire the number of pre-existing images. 
