@@ -1,4 +1,7 @@
 # surf-shop
+6/26/19
+Adding posts - Images Upload - Delete
+
 6/25/19
 to acquire the number of pre-existing images. 
     - let imageUpload = document.getElementById('imageUpload');
@@ -38,6 +41,8 @@ bodyParser syntax name="deleteImages[]" will create an array even if theres one 
 line duplicate down (shift + option + down arrow key)
 
 Delete posts and making sure that the images associated with the deleted post are removed on cloudinary as well.
+
+We use asynchronous methods because with js we have a lot of calls to servers and it would take a long time for a result to be received. 
 
 old code:
      // update it with req.body.post
