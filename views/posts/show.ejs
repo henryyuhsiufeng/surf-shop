@@ -1,3 +1,37 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        width: 700px;
+        height: 400px;
+      }
+
+      .marker {
+        background-image: url('/images/mapbox-icon.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        }
+
+    .mapboxgl-popup {
+        max-width: 200px;
+        }
+
+    .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+
 <h1><%= post.title %></h1>
 <div>Price: <%= post.price %></div>
 <div><%= post.description %></div>
@@ -7,6 +41,8 @@
         <img src="<%= image.url %>" alt="Surf board image" width="200">
     <% });%>
 </div>
+<!--Load Map-->
+<div id='map'></div>
 <div>
     <a href="/posts/<%= post.id%>/edit">
        <button>Edit</button> 
@@ -16,6 +52,68 @@
         <input type="submit" value="Delete">
     </form>
 </div>
+
+<!--Internal script that is going to initialize the map
+ and include it in the div we created for the map-->
+<script>
+
+//gets the mapboxgl variable from the cdn up top.
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGVmZS0yNyIsImEiOiJjanlrN3p4dW4wYnFuM2RwYTVzN2hhdGZsIn0.rMocpwZN20tlucYvAQXc9A';
+
+// instatiating a new map from the mapboxgl.Map constructor. 
+var map = new mapboxgl.Map({
+  //the map in container is matched with the map id   
+  container: 'map',
+  //mapbox actually has a lot of styles
+  style: 'mapbox://styles/mapbox/light-v10',
+  center: [-96, 37.8],
+  zoom: 3
+});
+
+// code from the next step will go here!
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.032, 38.913]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'Washington, D.C.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.414, 37.776]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'San Francisco, California'
+    }
+  }]
+};
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+    .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+    .addTo(map);
+});
+
+
+</script>
 
 
 <!--
