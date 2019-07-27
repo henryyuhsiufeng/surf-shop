@@ -1,4 +1,7 @@
 # surf-shop
+6/27/19
+added basic map with mapbox to show ejs in mapbox test branch
+
 6/26/19
 Adding posts - Images Upload - Delete
 We have the deletion process to delete the posts, but does not delete the images in Cloudinary.
