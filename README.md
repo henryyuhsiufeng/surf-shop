@@ -1,4 +1,34 @@
 # surf-shop
+6/28/19
+
+    To do:
+    # Geocoding Post Addess and Adding Its Marker to the Map
+
+    ## Update post Model
+    - Remove lat and lng and add coordinates: Array
+        - we get an array of coordinates already
+
+    ## Update Posts Controller
+    - Add the geocodingClient to top of file:
+    `````
+    const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+    const geocodingClient = mbxGeocodng({
+        accessToken: process.env.MAPBOX_TOKEN
+    });
+    `````
+    - Update create (POST) method:
+    `````
+
+    `````
+    - Assign the responses's coordinates to req.body.post.
+    - Save the post
+
+    # Update the Post Show View
+    - Remove geojson object
+    - Remvoe forEach loop over geoson.features
+    - Assign post variable from EJS local variable
+    - Update marker to sue post instead 
+
 6/27/19
 add mapbox to posts/show
 
