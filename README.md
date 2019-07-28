@@ -2,6 +2,10 @@
 
 6/27/19
 added basic map with mapbox to show ejs in mapbox test branch
+
+Start working on templates, which allows us to have a different styling for different views. 
+
+npm install ejs-mate --save
 =======
 6/28/19
 

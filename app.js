@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const createError             = require('http-errors'),
       express                 = require('express'),
+      engine                  = require('ejs-mate'),
       path                    = require('path'),
       cookieParser            = require('cookie-parser'),
       logger                  = require('morgan'),
@@ -32,6 +33,8 @@ db.once('open', () => {
   console.log('we\'re connected');
 });
 
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
