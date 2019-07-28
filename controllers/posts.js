@@ -112,12 +112,29 @@ module.exports = {
                     });
                 }
             }
- 
+            
+            // check if location was updated
+            // checking the form against the database
+            // if it is different then we know that an edit has been made to the location
+            if(req.body.post.location !== post.location) {
+                // take that location and use api to geocode that location into a set of coordinates
+                let response = await geocodingClient
+                .forwardGeocode({
+                    //comes from the form so we can take location user enters and turn into geocoordinates
+                    query: req.body.post.location,
+                    limit: 1
+                })
+                .send();
+                // now that we have access to location we will update coordinates
+                post.coordinates = response.body.features[0].geometry.coordinates;
+                // now if the location wasn't changed, we wouldn't even bother overwriting whatever was inside anyways
+                post.location = req.body.post.location;
+            }
+
             // update the post with new any new properties coming from the form
             post.title = req.body.post.title;
             post.description = req.body.post.description;
             post.price = req.body.post.price;
-            post.location = req.body.post.location;
             // save the updated post into the db
             post.save();
             // redirect to show page
