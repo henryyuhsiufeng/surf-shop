@@ -10,8 +10,7 @@ const PostSchema = new Schema({
     // is going to allow us to easily display images in views and ejs.
     images: [ {url: String, public_id: String}],
     location: String,
-    lat: Number,
-    lng: Number,
+    coordinates: Array,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

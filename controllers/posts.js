@@ -1,4 +1,7 @@
 const Post = require('../models/post');
+// give ability to use geocodingclient
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
 const cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: 'dkulk3gvx',
@@ -42,6 +45,15 @@ module.exports = {
                public_id: image.public_id
            });
         }
+        let response = await geocodingClient
+            .forwardGeocode({
+                //comes from the form so we can take location user enters and turn into geocoordinates
+                query: req.body.post.location,
+                limit: 1
+            })
+            .send();
+        // create variable in post called coordinates that stores the coordinate location from the form
+        req.body.post.coordinates = response.body.features[0].geometry.coordinates;
         // use req.body to create a new Post
         // req.body.post will now also contain req.body.post.images
         let post = await Post.create(req.body.post);

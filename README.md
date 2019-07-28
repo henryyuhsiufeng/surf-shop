@@ -1,10 +1,53 @@
 # surf-shop
+
 6/27/19
 added basic map with mapbox to show ejs in mapbox test branch
+=======
+6/28/19
+
+    To do:
+    # Geocoding Post Addess and Adding Its Marker to the Map
+
+    ## Update post Model
+    - Remove lat and lng and add coordinates: Array
+        - we get an array of coordinates already
+
+    ## Update Posts Controller
+    - Add the geocodingClient to top of file:
+    `````
+    const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+    const geocodingClient = mbxGeocodng({
+        accessToken: process.env.MAPBOX_TOKEN
+    });
+    `````
+    - Update create (POST) method:
+    `````
+
+    `````
+    - Assign the responses's coordinates to req.body.post.
+    - Save the post
+
+    # Update the Post Show View
+    - Remove geojson object
+    - Remvoe forEach loop over geoson.features
+    - Assign post variable from EJS local variable
+    - Update marker to sue post instead 
+
+6/27/19
+add mapbox to posts/show
+>>>>>>> mapbox
 
 6/26/19
 Adding posts - Images Upload - Delete
 We have the deletion process to delete the posts, but does not delete the images in Cloudinary.
+
+To handle HTTP POST request in Express.js version 4 and above, you need to install middleware module called body-parser.
+
+body-parser extract the entire body portion of an incoming request stream and exposes it on req.body.
+
+The middleware was a part of Express.js earlier but now you have to install it separately.
+
+This body-parser module parses the JSON, buffer, string and URL encoded data submitted using HTTP POST request. Install body-parser using NPM as shown below.
 
 6/25/19
 to acquire the number of pre-existing images. 
