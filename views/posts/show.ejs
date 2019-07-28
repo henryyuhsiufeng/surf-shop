@@ -1,36 +1,4 @@
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
-
-<style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      #map {
-        width: 350px;
-        height: 200px;
-      }
-
-      .marker {
-        background-image: url('/images/mapbox-icon.png');
-        background-size: cover;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        }
-
-    .mapboxgl-popup {
-        max-width: 200px;
-        }
-
-    .mapboxgl-popup-content {
-        text-align: center;
-        font-family: 'Open Sans', sans-serif;
-        }
-    </style>
+<% layout('layouts/post-show-layout') -%>
 
 <h1><%= post.title %></h1>
 <div>Price: <%= post.price %></div>
@@ -53,37 +21,6 @@
     </form>
 </div>
 
-<!--Internal script that is going to initialize the map
- and include it in the div we created for the map-->
-<script>
-// we have access to the post and the array that stores the coordinates
-// But we have to also to our clientside java script. 
-var post = <%- JSON.stringify(post) %>
-//gets the mapboxgl variable from the cdn up top.
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGVmZS0yNyIsImEiOiJjanlrN3p4dW4wYnFuM2RwYTVzN2hhdGZsIn0.rMocpwZN20tlucYvAQXc9A';
-
-// instatiating a new map from the mapboxgl.Map constructor. 
-var map = new mapboxgl.Map({
-  //the map in container is matched with the map id   
-  container: 'map',
-  //mapbox actually has a lot of styles
-  style: 'mapbox://styles/mapbox/light-v10',
-  center: post.coordinates,
-  zoom: 7
-});
-
-  // create a HTML element for our post lcoation/marker
-  var el = document.createElement('div');
-  el.className = 'marker';
-
-  // make a marker for our location and add to the map
-  new mapboxgl.Marker(el)
-    .setLngLat(post.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
-    .addTo(map);
-
-</script>
 
 
 <!--
