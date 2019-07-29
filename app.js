@@ -67,6 +67,13 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// title middleware
+app.use(function(req, res, next) {
+  // will be overwritten if title does exist
+  res.locals.title = 'Surf Shop';
+  next();
+});
+
 //mount routes
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
@@ -74,7 +81,9 @@ app.use('/posts/:id/reviews', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler

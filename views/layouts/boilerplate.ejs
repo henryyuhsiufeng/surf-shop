@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>   
+  <!--up to views and down to partials and select. ejs extension not needed-->
+    <% include ../partials/navbar  %> 
     <%- body -%>
  </body>
 </html>

@@ -15,7 +15,7 @@ module.exports = {
        //gets all the posts in the post collection
         let posts = await Post.find({});
         //in es5 {posts:posts}
-        res.render('posts/index', {posts})
+        res.render('posts/index', {posts, title: 'Posts Index'})
     },
 
     // Post New
@@ -25,7 +25,7 @@ module.exports = {
     // If error occurs there is a middleware that will account for that in 
     // app.js 
     postNew(req, res, next) {
-        res.render('posts/new');
+        res.render('posts/new',{title: 'New Post'});
     },
     // Posts Create
     async postCreate(req, res, next){

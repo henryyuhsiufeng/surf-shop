@@ -1,6 +1,7 @@
 # surf-shop
-
-6/27/19
+6/29/19
+Set up navbar
+6/28/19
 added basic map with mapbox to show ejs in mapbox test branch
 
 Start working on templates, which allows us to have a different styling for different views. 
