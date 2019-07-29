@@ -77,7 +77,7 @@ app.use(function(req, res, next) {
   // once done dealing with session we delete success property of req.session object
   delete req.session.success; 
   // set error flash message
-  res.locals.success = req.session.error || '';
+  res.locals.error = req.session.error || '';
   delete req.session.error; 
   // continue on to next function in middleware chain
   next();

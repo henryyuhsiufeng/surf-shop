@@ -57,6 +57,7 @@ module.exports = {
         // use req.body to create a new Post
         // req.body.post will now also contain req.body.post.images
         let post = await Post.create(req.body.post);
+        req.session.success = 'Post created successfully';
         // use backtick to allow js template literal syntax 
         res.redirect(`/posts/${post.id}`);
     },
