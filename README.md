@@ -1,6 +1,13 @@
 # surf-shop
 6/29/19
-Set up navbar
+Set up navbar, add flash messages
+
+# Adding Flash Messges
+- Update pre-route middleware to check for error or success on the session
+- Update post-route error handling middleware to console.log() the full err, then set err.messafe on req.session.error and redirect('back')
+- Create a partial for flash messafes and include it in our layouts 
+- Write some success messages and throw some erros to test it out.
+
 6/28/19
 added basic map with mapbox to show ejs in mapbox test branch
 
