@@ -2,6 +2,12 @@ const express = require('express');
 // mergeParams: true allows us to pull the id from the app.use 
 // /posts/-->:id<--/reviews
 const router = express.Router({ mergeParams: true });
+const { asyncErrorHandler } = require('../middleware');
+const {
+    reviewCreate,
+    reviewUpdate,
+    reviewDestroy
+} = require('../controllers/reviews');
 
 
 //no need because we are having the comment section on the same page
@@ -11,19 +17,13 @@ const router = express.Router({ mergeParams: true });
 // });
   
 /* POST reviews create index /posts/:id/reviews */
-router.post('/', function(req, res, next) {
-    res.send('CREATE /posts/:id/reviews/')
-});
+router.post('/', asyncErrorHandler(reviewCreate));
 
 /* PUT reviews update /posts/:id/reviews:id */
-router.put('/:id', function(req, res, next) {
-    res.send('PUT /posts/:id/reviews/:review_id')
-});
+router.put('/:id', asyncErrorHandler(reviewUpdate));
 
 /* DELETE reviews destroy /posts/:id/reviews:id */
-router.delete('/:id', function(req, res, next) {
-    res.send('DELETE /posts/:id/reviews/:review_id')
-});
+router.delete('/:id', asyncErrorHandler(reviewDestroy));
 
 
 module.exports = router;
