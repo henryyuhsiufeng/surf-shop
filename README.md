@@ -1,5 +1,22 @@
 # surf-shop
 6/30/19
+- Understand that the req.body is the JSON file being parsed in as an incoming request and that we wrapped it in reviews, so req.body.review will contain everything that was wrapped in the form eg review[body]
+
+- Plugin a user so that we don't have to keep logging in while in development. cURL tool in the terminal that allows us to use http requests in the terminal.
+    - Taking username:bob and password: password and using it to trick our website into thinking that we are always logged in.
+
+- Went back to using our original surf-shop database
+
+- mongo shell commands: db.users.find(), db.users.remove({})
+
+- Using cURL: 
+    - curl http://localhost:3000 
+    - curl -d "username=bob&password=password" -X POST http://localhost:3000/register
+        - "-d" allows us to enter in parameters as if in a form for create user
+        - No spaces 
+        - Once parameters have been made, we need to tell the request what type of method to use. "-X POST"
+        - will see a POST request in nodemon
+
 
 6/29/19
 Set up navbar, add flash messages
