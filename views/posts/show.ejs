@@ -35,29 +35,44 @@
     <%= review.body %><br>
     Rating : <%= review.rating %>
    </div>
+   <div>
+        <button class="toggle-edit-form">Edit</button>
+
+        <form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" 
+        method="POST" class="edit-review-form">
+             <textarea name="review[body]"><%= review.body %></textarea>
+             <input type="number" name="review[rating]" min="1" max="5" step="1"
+                value="<%= review.rating %>" required> 
+             <input type="submit" value="update">
+        </form>
+   </div>
    <hr>
 <% }); %> 
 
+<script>    
+    
+
+//     if (window.jQuery) {  
+//         // jQuery is loaded  
+//         alert("Yeah!");
+//     } else {
+//         // jQuery is not loaded
+//         alert("Doesn't Work");
+//     }
+// }   
 
 
-<!--
-    title: String,
-    price: String,
-    description: String,
-    images: [String],
-    location: String,
-    lat: Number,
-    lng: Number,
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    reviews: [
-        {
-            // because we use mongoose.Schema we don't have to use it 
-            // at the top. 
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ]
--->
+// All your code using $
+ //your code here
+    $('.toggle-edit-form').on('click', function(){
+       // toggle the edit button text on click
+       $(this).text() === 'Edit' ? $(this).text('Cancel') : $(this).text('Edit')
+       // toggle visibility of the edit review form and we want to select
+       // the specific review, not all reviews
+       // $(this) represents the selected button, siblings are elements that are right next to it so
+       // we are selecting the form with that class, toggle() will will remove the form
+       $(this).siblings('.edit-review-form').toggle();
+    });
+
+
+</script>

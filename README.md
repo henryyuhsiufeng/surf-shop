@@ -5,6 +5,7 @@
     - Add stlye.css to post-show-layout
     - Remove body rule from post-show.css
     - Add toggle edit button to post show view
+        - Make sure jquery cdn script is run before any other js code
     - Add edit form to the post show view
     - Add edit-form rule to post-show.css
     - Add jQuery to post-show-layout
