@@ -3,10 +3,6 @@ const express = require('express');
 // /posts/-->:id<--/reviews
 const router = express.Router({ mergeParams: true });
 
-/* GET reviews index /posts/:id/reviews */
-router.get('/', function(req, res, next) {
-    res.send('INDEX /posts/:id/reviews')
-});
 
 //no need because we are having the comment section on the same page
 // /* GET reviews index /posts/:id/reviews/new */
@@ -17,16 +13,6 @@ router.get('/', function(req, res, next) {
 /* POST reviews create index /posts/:id/reviews */
 router.post('/', function(req, res, next) {
     res.send('CREATE /posts/:id/reviews/')
-});
-
-/* GET reviews show /posts/:id/reviews/:review_id */
-router.get('/:review_id', function(req, res, next) {
-    res.send('SHOW /posts/:id/reviews/:review_id')
-});
-
-/* GET reviews edit /reviews/:id/edit */
-router.get('/:id/edit', function(req, res, next) {
-    res.send('EDIT /posts/:id/reviews/:id/edit')
 });
 
 /* PUT reviews update /posts/:id/reviews:id */

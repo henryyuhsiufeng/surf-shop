@@ -1,4 +1,6 @@
 # surf-shop
+6/30/19
+
 6/29/19
 Set up navbar, add flash messages
 
