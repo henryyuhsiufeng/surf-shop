@@ -10,8 +10,8 @@ module.exports = {
     async reviewCreate(req, res, next) {
         // find the post by its id
         let post = await Post.findById(req.params.id);
-        // create the review
-        // req.body.review.author = req.user._id;
+        // create the review & review now contains author
+         req.body.review.author = req.user._id;
         let review = await Review.create(req.body.review);
         // assign review to post
         post.reviews.push(review);

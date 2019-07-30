@@ -67,7 +67,11 @@ module.exports = {
             // sort the reviews that we are populating this post with in descending order
             // postive one is ascending order.
             path: 'reviews',
-            options: { sort: { '_id': -1 } }
+            options: { sort: { '_id': -1 } },
+            populate: {
+                path: 'author', 
+                model: 'User'
+            }
         });
         res.render('posts/show', { post })
     },
