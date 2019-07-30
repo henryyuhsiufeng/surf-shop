@@ -5,6 +5,7 @@ const ReviewSchema = new Schema({
     body: String,
     rating: Number,
     author: {
+        // author stores the id of the user model and ref indicates which model it is.
         type: Schema.Types.ObjectId,
         ref: 'User'
     }

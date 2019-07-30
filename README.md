@@ -1,5 +1,17 @@
 # surf-shop
 6/30/19
+
+- Working on edit review
+    - Add stlye.css to post-show-layout
+    - Remove body rule from post-show.css
+    - Add toggle edit button to post show view
+    - Add edit form to the post show view
+    - Add edit-form rule to post-show.css
+    - Add jQuery to post-show-layout
+    - Add click event listener script to post show view 
+        - Toggle text cancel/edit
+        - Toggle edit-form visibility
+
 - Understand that the req.body is the JSON file being parsed in as an incoming request and that we wrapped it in reviews, so req.body.review will contain everything that was wrapped in the form eg review[body]
 
 - Plugin a user so that we don't have to keep logging in while in development. cURL tool in the terminal that allows us to use http requests in the terminal.
