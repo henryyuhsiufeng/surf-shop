@@ -20,7 +20,7 @@ const {
 router.post('/', asyncErrorHandler(reviewCreate));
 
 /* PUT reviews update /posts/:id/reviews:id */
-router.put('/:id', asyncErrorHandler(reviewUpdate));
+router.put('/:review_id', asyncErrorHandler(reviewUpdate));
 
 /* DELETE reviews destroy /posts/:id/reviews:id */
 router.delete('/:id', asyncErrorHandler(reviewDestroy));

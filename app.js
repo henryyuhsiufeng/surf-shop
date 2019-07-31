@@ -73,17 +73,21 @@ app.use(function(req, res, next) {
     '_id' : '5d40aab18f0dc77cc4821b49',
     'username' : 'bob'
   }
-  // for any views that gets rendered we will have access to currentUser object
+  // for any views that gets rendered we will have access to currentUser object 
   res.locals.currentUser = req.user;
   // will be overwritten if title does exist 
   // set default page title
   res.locals.title = 'Surf Shop';
   // set success flash message
-  res.locals.success = req.session.sucess || '';
+  res.locals.success = req.session.success || '';
+  //console.log(req.sessions.success + 'FROM APP.JS');
+  //console.log(req.locals.success + 'FROM APP.JS');
   // once done dealing with session we delete success property of req.session object
   delete req.session.success; 
   // set error flash message
+  //console.log('error from middleware local variables');
   res.locals.error = req.session.error || '';
+  //console.log(res.session.error);
   delete req.session.error; 
   // continue on to next function in middleware chain
   next();
