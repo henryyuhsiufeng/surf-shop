@@ -21,3 +21,14 @@ new mapboxgl.Marker(el)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
     .setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>'))
     .addTo(map);
+
+// Toggle edit review form
+ $('.toggle-edit-form').on('click', function(){
+    // toggle the edit button text on click
+    $(this).text() === 'Edit' ? $(this).text('Cancel') : $(this).text('Edit')
+    // toggle visibility of the edit review form and we want to select
+    // the specific review, not all reviews
+    // $(this) represents the selected button, siblings are elements that are right next to it so
+    // we are selecting the form with that class, toggle() will will remove the form via css
+    $(this).siblings('.edit-review-form').toggle();
+ });
