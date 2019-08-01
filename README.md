@@ -1,6 +1,20 @@
 # surf-shop
-6/30/19
+7/1/19
 
+- REVIEW AUTHORIZATION
+- Create a second user witl cURL
+    - curl -d "username=bob2&password=password" -X POST http://localhost:3000/register
+- Change existing reviews's author to new user's id
+    - We need a review object's id and replace current author with the other auther object's id. 
+    - db.reviews.update({"_id" : ObjectId("5d41c6958292f58e708535f0")}, {$set: {"author": ObjectId("5d42f0e9a49d40979d7af1e8")}});
+- Add isReviewAuthor async middleware to PUT route and test it
+    - req.user is where we access the user id in the backend
+- Add if statement to EJS
+    - currentUser._id is where we access the user id in the client side.
+
+
+
+6/30/19
 - Working on edit review
     - Add stlye.css to post-show-layout
     - Remove body rule from post-show.css
