@@ -25,7 +25,7 @@ router.post('/', asyncErrorHandler(reviewCreate));
 router.put('/:review_id', isReviewAuthor, asyncErrorHandler(reviewUpdate));
 
 /* DELETE reviews destroy /posts/:id/reviews:id */
-router.delete('/:id', asyncErrorHandler(reviewDestroy));
+router.delete('/:review_id', isReviewAuthor, asyncErrorHandler(reviewDestroy));
 
 
 module.exports = router;

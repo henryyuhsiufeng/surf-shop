@@ -9,10 +9,18 @@
     - db.reviews.update({"_id" : ObjectId("5d41c6958292f58e708535f0")}, {$set: {"author": ObjectId("5d42f0e9a49d40979d7af1e8")}});
 - Add isReviewAuthor async middleware to PUT route and test it
     - req.user is where we access the user id in the backend
+    - the middleware that creates the current user variable is actually setting req.user equal to currentUser to have access in the view, but in the middleware we only have access to req.user.
 - Add if statement to EJS
     - currentUser._id is where we access the user id in the client side.
 
-
+- REVIEW DELETE
+- Create a delete button with a form in the post show view
+- Update the delet eroute with isReviewAuthor middleware and reviewDestroy method
+- In reviewDestroy method:
+    - Find post by id and update to pull reviews with matching review_id
+    - find review by id and remove
+    - flash success 
+    - redirect to back to post show
 
 6/30/19
 - Working on edit review
