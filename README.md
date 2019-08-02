@@ -1,6 +1,13 @@
 # surf-shop
-7/1/19
+7/2/19
 
+- RESTRICT ONE REVIEW PER USER, PER POST
+- Populate reviews on post in reviewCreate method (in reviews controller)
+- Assign hasReviewed to filtered array's length
+- If hasReviewed is true, then flash error and redirect
+- Otherwise, create review, add to post.reviews, save post, flash success, and redirect. 
+
+7/1/19
 - REVIEW AUTHORIZATION
 - Create a second user witl cURL
     - curl -d "username=bob2&password=password" -X POST http://localhost:3000/register

@@ -9,7 +9,15 @@ module.exports = {
     // Reviews Create
     async reviewCreate(req, res, next) {
         // find the post by its id
-        let post = await Post.findById(req.params.id);
+        // populate post with actual review id's and the exec gets all the individual review documents so we can check individial review id's
+        let post = await Post.findById(req.params.id).populate('reviews').exec();
+        let haveReviewed = post.reviews.filter(review => {
+            return review.author.equals(req.user._id);
+        }).length;
+        if(haveReviewed) {
+            req.session.error = 'Sorry, you can only create one review per post.';
+            return res.redirect(`/posts/${post.id}`);
+        }
         // create the review & review now contains author
          req.body.review.author = req.user._id;
         let review = await Review.create(req.body.review);
