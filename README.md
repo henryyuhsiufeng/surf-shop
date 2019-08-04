@@ -1,4 +1,8 @@
 # surf-shop
+7/4/19
+-REMOVE REFERENCED REVIEWS WHEN A POST GETS DELETED
+- Add pre('remove') hook/middleware to Post model
+- Add success flash message to posts controller postDestroy method
 7/2/19
 
 - RESTRICT ONE REVIEW PER USER, PER POST
@@ -6,6 +10,10 @@
 - Assign hasReviewed to filtered array's length
 - If hasReviewed is true, then flash error and redirect
 - Otherwise, create review, add to post.reviews, save post, flash success, and redirect. 
+
+- REMOVE REFERENCED REVIEWS WHEN A POST GETS DELETED
+- Add pre('remove') hook/middleware to Post model
+- Add success flash message to posts controller postDestroy method
 
 7/1/19
 - REVIEW AUTHORIZATION
