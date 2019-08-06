@@ -26,9 +26,14 @@ const PostSchema = new Schema({
     ]
 });
 
+
+// in the controllers any time the post.remove gets called then the prehook middleware gets called
+// we are using a function instead of an arrow because we need access to
+// this
 PostSchema.pre('remove', async function() {
     await Review.remove({
         _id: {
+          // gets any review id included in the post array
           $in:  this.reviews
         }
     });

@@ -1,10 +1,18 @@
 # surf-shop
 7/4/19
+- ADD 5 STAR RATING FEATURE
+- Add starability-basic.min.css to /public/stylesheets from [here](https://raw.githubusercontent.com/LunarLogic/starability/master/starability-minified/starability-basic.min.css)
+    - Review [documentation](https://github.com/LunarLogic/starability)
+- Add link to starability-basic.min,css in post-show-layout.ejs
+- Add starability syntax to review new and edit forms in post show.ejs
+- Customize id's and names
+- Add client script inside of .forEach loop for reviews to autho check rating in edit form
+
 -REMOVE REFERENCED REVIEWS WHEN A POST GETS DELETED
 - Add pre('remove') hook/middleware to Post model
 - Add success flash message to posts controller postDestroy method
-7/2/19
 
+7/2/19
 - RESTRICT ONE REVIEW PER USER, PER POST
 - Populate reviews on post in reviewCreate method (in reviews controller)
 - Assign hasReviewed to filtered array's length
