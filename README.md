@@ -1,4 +1,23 @@
 # surf-shop
+7/6/19
+- ADD CLEAR RATING BUTTON TO 5 STAR RATING FEATURE
+- Add a button to the new/edit review forms:
+```` HTML
+    <button class="clear-rating" type="button>Clear Rating</button>
+````
+- Add styling to /public/stylesheets/post-show.css
+````CSS
+    .clear-rating {
+        display: block;
+    }
+````
+- Add click listener to the clear rating button in /public/javascripts/post-show.js ( selects and clicks nearest zero star rating input):
+````JS
+    $('.clear-rating').click(function() {
+        $(this).siblings('.input-no-rate').click();
+    })
+````
+
 7/4/19
 - ADD 5 STAR RATING FEATURE
 - Add starability-basic.min.css to /public/stylesheets from [here](https://raw.githubusercontent.com/LunarLogic/starability/master/starability-minified/starability-basic.min.css)
