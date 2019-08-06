@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Review = require('./review');
+const mongoosePaginate = require('mongoose-paginate');
 
 const PostSchema = new Schema({
     title: String,
@@ -39,8 +40,11 @@ PostSchema.pre('remove', async function() {
     });
 });
 
-module.exports = mongoose.model('Post', PostSchema);
 
+
+// enable mongoosePagination in our application so we can now use the 
+// paginate method to query the database instead of .find
+PostSchema.plugin(mongoosePaginate);
 
 /*
 Post
@@ -54,3 +58,5 @@ Post
 -author -Object id ref user
 -reviews -array of objects
 */
+
+module.exports = mongoose.model('Post', PostSchema);

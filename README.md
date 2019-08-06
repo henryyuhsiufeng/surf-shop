@@ -1,5 +1,28 @@
 # surf-shop
 7/6/19
+- ADD PAGINATION TO POSTS INDEX
+- Seed some post data
+    - Install faker
+    'npm i -S faker'
+    - Create a seeds.js file in the root directory /surf-shop and open it 
+    - Require faker
+    'const faker = require('faker');'
+    - Write an async function that removes existing posts and runs a loop that generates 40 posts
+    ```JS
+    async function seedPosts() {
+        await Post.remove({});
+        for(const i of new Array(40)) {
+            const post = {
+                title: faker.lorem.word().
+                description: faker.lorem.text(),
+                author: {
+                   '_id' : '5d40aab18f0dc77cc4821b49',
+                    'username' : 'bob'
+                }
+            }
+        }
+    }
+
 - ADD CLEAR RATING BUTTON TO 5 STAR RATING FEATURE
 - Add a button to the new/edit review forms:
 ```` HTML
