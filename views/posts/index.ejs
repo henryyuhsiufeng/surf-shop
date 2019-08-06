@@ -1,12 +1,27 @@
 <% layout('layouts/boilerplate') -%>
 <h1>Posts Index!</h1>
+<div style="margin: 20px 0;">
+    <!--if 0, then falsey-->
+    <% if(posts.page - 1) { %>
+        <a href="/posts?page=<%= posts.page - 1 %>">Prev</a>        
+   <% } %>
+   <% for(let i = 1; i <= posts.pages; i++) {%>
+        <a href="/posts?page=<%= i %>"
+        <%= i === posts.page ? 'style=color:#000;' : '' %>
+        ><%= i %></a>
+   <%}%>
+   <!--Check if the next page is within range-->
+   
+   <% if((posts.page + 1) <= posts.pages) { %>
+        <a href="/posts?page=<%= posts.page + 1 %>">Next</a>        
+   <% } %>
 
+</div>
 <!--It will no longer just be posts because posts will just contain
     a bunch of stuff with random properties instead of pointing to an
     array of all the posts. Instead, it will contain info on which page
     in pagination and the limit. We access the post info with .docs
  -->
- <% console.log('YEEEEEEEEEEEEEEEDEEEEEARFAFVAFL'); %>
 <% posts.docs.forEach(function(post){%>
 <div>
     <h2><%= post.title %></h2>

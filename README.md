@@ -1,5 +1,7 @@
 # surf-shop
 7/6/19
+- ADD PAGE NUMBERS TO POSTS INDEX
+
 - ADD PAGINATION TO POSTS INDEX
 - Seed some post data
     - Install faker

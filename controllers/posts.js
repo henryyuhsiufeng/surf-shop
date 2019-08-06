@@ -13,12 +13,13 @@ module.exports = {
     // Post Index
    async postIndex(req, res, next) {
        //gets all the posts in the post collection
-        console.log('ASSS AND TITTIES');
+        //console.log('ASSS AND TITTIES');
         let posts = await Post.paginate({},{
             // determines which page we are on
             page: req.query.page || 1,
             limit: 10
         });
+        posts.page = Number(posts.page);
         //in es5 {posts:posts}
         res.render('posts/index', {posts, title: 'Posts Index'})
     },
