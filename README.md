@@ -1,5 +1,14 @@
 # surf-shop
+7/7/19
+- Need to modify seeds.js so that the client side js does not break.
+
 7/6/19
+- ADD AVERAGE RATING TO POST
+- Add an extra user to the database so we have three to make reviews with (run in terminal with server running separately)
+    'curl -d "username=bob3&password=password' -X POST http://localhost:3000/register
+- Add avgRating property to PostSchema (/models/posts.js)
+- Add review model, remove all reviews, and add coordinates to post in seeds.js (/seeds.js)
+
 - ADD PAGE NUMBERS TO POSTS INDEX
 
 - ADD PAGINATION TO POSTS INDEX

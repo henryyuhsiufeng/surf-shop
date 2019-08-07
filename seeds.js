@@ -2,13 +2,14 @@ const faker = require('faker');
 const Post = require('./models/post');
 
 async function seedPosts() {
-    console.log('ASDFASDFASDFASDFASDFASDFASDFASDFSADASDFASD');
+    //console.log('ASDFASDFASDFASDFASDFASDFASDFASDFSADASDFASD');
     // remove currentlt existing posts
     await Post.remove({});
     for(const i of new Array(40)) {
         const post = {
             title: faker.lorem.word(),
             description: faker.lorem.text(),
+            coordinates: [-155.5000, 19.5667],
             author: {
                 '_id' : '5d40aab18f0dc77cc4821b49',
                 'username' : 'bob'
