@@ -21,7 +21,10 @@ module.exports = {
         });
         posts.page = Number(posts.page);
         //in es5 {posts:posts}
-        res.render('posts/index', {posts, title: 'Posts Index'})
+        res.render('posts/index', {
+             posts,
+             mapBoxToken: process.env.MAPBOX_TOKEN, 
+             title: 'Posts Index'});
     },
 
     // Post New
