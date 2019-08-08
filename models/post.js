@@ -12,7 +12,21 @@ const PostSchema = new Schema({
     // is going to allow us to easily display images in views and ejs.
     images: [ {url: String, public_id: String}],
     location: String,
-    coordinates: Array,
+    geometry: {
+        type:  {
+            type: String,
+            enum: [],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
+    // helps us put a pop on each of the markers
+    properties: {
+        description: String
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

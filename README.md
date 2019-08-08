@@ -1,4 +1,10 @@
 # surf-shop
+7/8/19
+- ADD CLUSTERED MAPS TO LANDING PAGE AND POSTS INDEX
+- Add your mapbox token to the .env file 
+- Update Post Model (/models/post.js)
+- Update Index Controller (/controllers/index.js)
+
 7/7/19
 - Need to modify seeds.js so that the client side js does not break.
 

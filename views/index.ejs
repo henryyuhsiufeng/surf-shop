@@ -1,4 +1,17 @@
 <% layout('layouts/boilerplate') -%>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
+<div id="map"></div>
+
+
+<!--How to get local variable to our view and set it to our js variable-->
+<script>
+    mapboxgl.accessToken = "<%= mapBoxToken %>";
+    // on some browsers don't accept const and let
+    // mapbox api expects a specific format 
+    // We can't directly plug into client side js so we use stringify
+    var posts = {features: <%- JSON.stringify(posts) %> };
+</script>
+
+<script src="/javascripts/allPostsClusterMap.js"></script>
 

@@ -5,7 +5,7 @@ const router = express.Router();
 //when we require controllers/index it exports the object from module
 //exports and we can pull any of the keys from that object.
 //--- (es6 destructuring format)
-const {postRegister, postLogin, getLogout} = require('../controllers/index');
+const {landingPage, postRegister, postLogin, getLogout} = require('../controllers');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
@@ -15,10 +15,8 @@ const { asyncErrorHandler } = require('../middleware');
 // index.js uses es6 formatting 
 //The index.js will allow users to sign up or login
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Surf Shop - Home' });
-});
+/* GET home/landing page. */
+router.get('/', asyncErrorHandler(landingPage));
 
 /* GET /register home page. */
 router.get('/register', (req, res, next) => {
