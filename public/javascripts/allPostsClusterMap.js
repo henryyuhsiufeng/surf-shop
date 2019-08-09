@@ -1,4 +1,6 @@
 // populate clusters. getting code from mapbox
+
+// creates map
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v9',
@@ -6,25 +8,31 @@ var map = new mapboxgl.Map({
     zoom: 3.3
 });
 
+// It enables the search capability on the map
 map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
 }));
 
+// add additional point count data to our posts data from out index.ejs
 map.on('load', function() {
     // Add a new source from our GeoJSON data and set the
     // 'cluster' option to true. GL-JS will add the point_count property to your source data.
     map.addSource("posts", {
         type: "geojson",
+        // from the views/index.ejs file
         data: posts,
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
     });
 
+
+    // the circles you see on the map. Layer for our clusters
     map.addLayer({
         id: "clusters",
         type: "circle",
         source: "posts",
+        // only cluster points with point_count
         filter: ["has", "point_count"],
         paint: {
             // Use step expressions (https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -53,6 +61,7 @@ map.on('load', function() {
         }
     });
 
+    // cluster count layer
     map.addLayer({
         id: "cluster-count",
         type: "symbol",

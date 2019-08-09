@@ -1,8 +1,10 @@
 const Post = require('../models/post');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
 // give ability to use geocodingclient
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 const cloudinary = require('cloudinary');
+
 cloudinary.config({
     cloud_name: 'dkulk3gvx',
     api_key: '859914662181975',
@@ -23,7 +25,7 @@ module.exports = {
         //in es5 {posts:posts}
         res.render('posts/index', {
              posts,
-             mapBoxToken: process.env.MAPBOX_TOKEN, 
+             mapBoxToken, 
              title: 'Posts Index'});
     },
 

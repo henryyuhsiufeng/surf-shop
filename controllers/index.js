@@ -1,13 +1,14 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const passport = require('passport');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
 
 //anything inside this object will be exported
 module.exports = {
     // GET /
     async landingPage(req, res, next) {
         const posts = await Post.find({});
-        res.render('index', {posts, mapBoxToken: process.env.MAPBOX_TOKEN, title: 'Surf Shop - Home'});
+        res.render('index', {posts, mapBoxToken, title: 'Surf Shop - Home'});
     },
     //create a method that we can use with post register route in user index
     //this is a method of this parent object
