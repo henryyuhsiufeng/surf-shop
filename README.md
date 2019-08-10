@@ -1,5 +1,39 @@
 ################ surf-shop ################
 7/10/19
+## CONTINUE USER AUTHENTICATION AND AUTHORIZATION
+# Update Register and Login
+- Commnet out the req.user object assignment in app.js where you're setting a user to always be logged in: 
+- Add a getRegister method to /controllers/index.js right befire existing postRegister method:
+    ````
+        // GET /register
+        getRegister(req, res, next) {
+            res.render('register', { title: 'Register' });
+        },
+    ````
+- Add getLogin method to /controllers/index.js right before existing postLogin method
+    ````
+    // GET /login
+    getLogin(req, res, next) {
+        res.render('login', { title: 'Login' });
+    },
+    ````
+- Update postRegister method inside of /controllers/index.js 
+    ````
+    async postRegister(req, res, next) {
+	const newUser = new User({
+		username: req.body.username,
+		email: req.body.email,
+		image: req.body.image
+	});
+
+	let user = await User.register(newUser, req.body.password);
+        req.login(user, function(err) {
+        if (err) { return next(err); }
+        req.session.success = `Welcome to Surf Shop, ${newUser.username}!`;
+        res.redirect('/');
+        });
+    },
+    ````
 ## REMOVE LOCAL IMAGE STORAGE
 # Delete /uploads directory from app's root directory
 - Navigate to root directory of surf-shop app in your terminal and run 'rm -rf ./uplaods'
@@ -43,6 +77,27 @@ module.exports = {
 - Remove: 'const upload = multer({'dest': 'uploads/'});'
 - Add: 'const { cloudinary, storage } = require('../cloudinary');'
 - Add: 'const upload = multer({ storage });'
+
+# Update /controllers/posts.js
+- Remove: 
+    ````
+        const cloudinary = require('cloudinary');
+        cloudinary.config({
+            cloud_name: 'devsprout',
+            api_key: '111963319915549',
+            api_secret: process.env.CLOUDINARY_SECRET
+        });
+    ````
+- Add: 
+- Inside both the postCreate and postUpdate methods, change: 
+    ````
+        for(const file of req.files) {
+        req.body.post.images.push({
+            url: file.secure_url,
+            public_id: file.public_id
+        });
+}
+    ````
 
 7/8/19
 - ADD CLUSTERED MAPS TO LANDING PAGE AND POSTS INDEX
