@@ -1,4 +1,42 @@
-# surf-shop
+################ surf-shop ################
+7/10/19
+## REMOVE LOCAL IMAGE STORAGE
+# Delete /uploads directory from app's root directory
+- Navigate to root directory of surf-shop app in your terminal and run 'rm -rf ./uplaods'
+
+# Install multer-storage-cloudinary
+- 'npm i - multer-storage-cloudinary'
+
+# Configure Cloudinary and storage
+- Create a folder named 'cloudinary '
+- Create an index.js file inside of the new /cloudinary directory
+- Add the following code to the /cloudinary/index.js file and save it: 
+````
+        const crypto = require('crypto');
+        const cloudinary = require('cloudinary');
+        cloudinary.config({
+            cloud_name: 'YOUR-CLOUD-NAME-HERE',
+            api_key: 'YOUR-API-KEY-HERE',
+            api_secret: process.env.CLOUDINARY_SECRET
+        });
+        const cloudinaryStorage = require('multer-storage-cloudinary');
+        const storage = cloudinaryStorage({
+        cloudinary: cloudinary,
+        folder: 'surf-shop',
+        allowedFormats: ['jpeg', 'jpg', 'png'],
+        filename: function (req, file, cb) {
+            let buf = crypto.randomBytes(16);
+            buf = buf.toString('hex');
+            let uniqFileName = file.originalname.replace(/\.jpeg|\.jpg|\.png/ig, '');
+            uniqFileName += buf;
+            cb(undefined, uniqFileName );
+        }
+        });
+````
+module.exports = {
+	cloudinary,
+	storage
+}
 7/8/19
 - ADD CLUSTERED MAPS TO LANDING PAGE AND POSTS INDEX
 - Add your mapbox token to the .env file 
