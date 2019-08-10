@@ -2,9 +2,16 @@ const express = require('express');
 const router = express.Router();
 const { asyncErrorHandler } = require('../middleware');
 const multer = require('multer');
+
 // uploads directory is where the files will be stored temporarily before
 // they get uploaded into the cloud and stored into the database
-const upload = multer({'dest': 'uploads/'});
+// const upload = multer({'dest': 'uploads/'});
+
+// Destructoring of the cloudinary directory with the index.js file in there
+const { cloudinary, storage } = require('../cloudinary');
+// set up the upload to cloudinary storage 
+const upload = multer({ storage });
+
 const { postIndex, 
         postNew, 
         postCreate,

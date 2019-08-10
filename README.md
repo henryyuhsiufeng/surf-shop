@@ -5,7 +5,7 @@
 - Navigate to root directory of surf-shop app in your terminal and run 'rm -rf ./uplaods'
 
 # Install multer-storage-cloudinary
-- 'npm i - multer-storage-cloudinary'
+- 'npm i -S multer-storage-cloudinary'
 
 # Configure Cloudinary and storage
 - Create a folder named 'cloudinary '
@@ -32,11 +32,18 @@
             cb(undefined, uniqFileName );
         }
         });
-````
+
 module.exports = {
 	cloudinary,
 	storage
 }
+````
+
+# Update /routes/posts.js
+- Remove: 'const upload = multer({'dest': 'uploads/'});'
+- Add: 'const { cloudinary, storage } = require('../cloudinary');'
+- Add: 'const upload = multer({ storage });'
+
 7/8/19
 - ADD CLUSTERED MAPS TO LANDING PAGE AND POSTS INDEX
 - Add your mapbox token to the .env file 

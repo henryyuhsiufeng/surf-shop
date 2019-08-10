@@ -3,13 +3,7 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 // give ability to use geocodingclient
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
-const cloudinary = require('cloudinary');
-
-cloudinary.config({
-    cloud_name: 'dkulk3gvx',
-    api_key: '859914662181975',
-    api_secret: process.env.CLOUDINARY_SECRET
-});
+const { cloudinary } = require('../cloudinary');
 
 module.exports = {
     // Post Index
@@ -44,17 +38,18 @@ module.exports = {
         req.body.post.images = [];
         //req.files is going to be the array of files.
         for(const file of req.files) {
-            // this method returns a promise
-            // if we await it, we can get whatever the promise resolves to, so 
-            // we can assign whatever it is to a variable. We then will store the info
-            // stored in variable imagE. 
-           let image = await cloudinary.v2.uploader.upload(file.path);
+                    // this method returns a promise
+                    // if we await it, we can get whatever the promise resolves to, so 
+                    // we can assign whatever it is to a variable. We then will store the info
+                    // stored in variable imagE. 
+                    // let image = await cloudinary.v2.uploader.upload(file.path);
            // After we get back each images from out uploads to cloudinary let's
            // create an object and store it within req.body.post.images
            req.body.post.images.push({
-               url: image.secure_url,
-               public_id: image.public_id
+               url: file.secure_url,
+               public_id: file.public_id
            });
+           
         }
         let response = await geocodingClient
             .forwardGeocode({
@@ -64,13 +59,12 @@ module.exports = {
             })
             .send();
         // create variable in post called coordinates that stores the coordinate location from the form
-        req.body.post.coordinates = response.body.features[0].geometry.coordinates;
-        // use req.body to create a new Post
-        // req.body.post will now also contain req.body.post.images
-        let post = await Post.create(req.body.post);
-        // req.session.success = 'Post created successfully';
-        // use backtick to allow js template literal syntax 
-        res.redirect(`/posts/${post.id}`);
+        req.body.post.geometry = response.body.features[0].geometry;
+        let post = new Post(req.body.post);
+		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
+		post.save();
+		req.session.success = 'Post created successfully!';
+		res.redirect(`/posts/${post.id}`);
     },
     //Post Show
     async postShow(req, res, next) {
@@ -86,7 +80,7 @@ module.exports = {
             }
         });
         const floorRating = post.calculateAvgRating();
-        res.render('posts/show', { post, floorRating })
+		res.render('posts/show', { post, mapBoxToken, floorRating });
     },
     // Posts Edit
     async postEdit(req, res, next){
@@ -126,12 +120,11 @@ module.exports = {
             if(req.files) {
                 // upload images
                 for(const file of req.files) {
-                    let image = await cloudinary.v2.uploader.upload(file.path);
                     // remember we have access to post because we found post at the very beginning of the method
                      // add images to post.images array
                     post.images.push({
-                        url: image.secure_url,
-                        public_id: image.public_id
+                        url: file.secure_url,
+                        public_id: file.public_id
                     });
                 }
             }
@@ -149,9 +142,9 @@ module.exports = {
                 })
                 .send();
                 // now that we have access to location we will update coordinates
-                post.coordinates = response.body.features[0].geometry.coordinates;
+                post.geometry = response.body.features[0].geometry;
                 // now if the location wasn't changed, we wouldn't even bother overwriting whatever was inside anyways
-                post.location = req.body.post.location;
+			    post.location = req.body.post.location;
             }
 
             // update the post with new any new properties coming from the form
