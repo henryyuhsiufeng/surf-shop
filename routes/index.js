@@ -5,7 +5,12 @@ const router = express.Router();
 //when we require controllers/index it exports the object from module
 //exports and we can pull any of the keys from that object.
 //--- (es6 destructuring format)
-const {landingPage, postRegister, postLogin, getLogout} = require('../controllers');
+const {landingPage, 
+      getRegister,
+      postRegister, 
+      postLogin, 
+      getLogin,
+      getLogout} = require('../controllers');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
@@ -19,18 +24,14 @@ const { asyncErrorHandler } = require('../middleware');
 router.get('/', asyncErrorHandler(landingPage));
 
 /* GET /register home page. */
-router.get('/register', (req, res, next) => {
-  res.send('GET /register');
-});
+router.get('/register', getRegister);
 
 /* POST /register home page. */
 //postRegister has access to req, res, and next (look at code)
 router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET /login */
-router.get('/login', (req, res, next) => {
-  res.send('GET /login');
-});
+router.get('/login',getLogin);
 
 /* POST /login home page. */
 router.post('/login', postLogin);

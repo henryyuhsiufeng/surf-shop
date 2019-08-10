@@ -34,6 +34,10 @@
         });
     },
     ````
+- Add getRegister and getLogin methods to /routes/index.js:
+    ````
+        const { landingPage, getRegister, postRegister, getLogin, postLogin, getLogout } = require('../controllers');
+    ````
 ## REMOVE LOCAL IMAGE STORAGE
 # Delete /uploads directory from app's root directory
 - Navigate to root directory of surf-shop app in your terminal and run 'rm -rf ./uplaods'

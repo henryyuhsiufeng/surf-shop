@@ -10,6 +10,11 @@ module.exports = {
         const posts = await Post.find({});
         res.render('index', {posts, mapBoxToken, title: 'Surf Shop - Home'});
     },
+    // GET /register
+    getRegister(req, res, next) {
+        res.render('register', {title: 'register' });
+    },
+
     //create a method that we can use with post register route in user index
     //this is a method of this parent object
     //POST /register
@@ -26,8 +31,20 @@ module.exports = {
         //home
         //await will not work unless we have a asynch function that it is inside
         //of (await is only valid in async function)
-        await User.register(newUser, req.body.password);
-        res.redirect('/');
+        let user = await User.register(newUser, req.body.password);
+        req.login(user, function(err) {
+            if(err) {
+                return next(err);
+            }
+            req.session.success = `Welcome to Surf Shop, ${user.username}!`;
+            res.redirect('/');
+        });
+        
+    },
+
+    // GET /login
+    getLogin(req, res, next) {
+        res.render('login', {title: 'Login' });
     },
 
     //POST /login
