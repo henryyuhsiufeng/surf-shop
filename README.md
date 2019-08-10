@@ -1,8 +1,12 @@
 ################ surf-shop ################
 7/10/19
 ## CONTINUE USER AUTHENTICATION AND AUTHORIZATION
+# Create Register and Login Views
+- Create a new file inside of /views named register.ejs
+
+
 # Update Register and Login
-- Commnet out the req.user object assignment in app.js where you're setting a user to always be logged in: 
+- Comment out the req.user object assignment in app.js where you're setting a user to always be logged in: 
 - Add a getRegister method to /controllers/index.js right befire existing postRegister method:
     ````
         // GET /register

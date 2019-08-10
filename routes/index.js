@@ -14,7 +14,7 @@ const {landingPage,
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
-const { asyncErrorHandler } = require('../middleware');
+const { asyncErrorHandler, checkIfUserExists } = require('../middleware');
 
 
 // index.js uses es6 formatting 
@@ -28,7 +28,9 @@ router.get('/register', getRegister);
 
 /* POST /register home page. */
 //postRegister has access to req, res, and next (look at code)
-router.post('/register', asyncErrorHandler(postRegister));
+router.post('/register',
+ asyncErrorHandler(checkIfUserExists),
+ asyncErrorHandler(postRegister));
 
 /* GET /login */
 router.get('/login',getLogin);
