@@ -18,27 +18,46 @@ module.exports = {
     //create a method that we can use with post register route in user index
     //this is a method of this parent object
     //POST /register
-    async postRegister(req, res, next) {
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            image: req.body.image
-        });
-        //user register with a new username and we are pulling the username from the form
-        //the we pass the password as the second parameter, which then takes the password
-        //hashes and salts it.
-        //wait for user.register to finish running until we redirect back
-        //home
-        //await will not work unless we have a asynch function that it is inside
-        //of (await is only valid in async function)
-        let user = await User.register(newUser, req.body.password);
-        req.login(user, function(err) {
-            if(err) {
-                return next(err);
+    // async postRegister(req, res, next) {
+    //     const newUser = new User({
+    //         username: req.body.username,
+    //         email: req.body.email,
+    //         image: req.body.image
+    //     });
+
+    // Better version of making sure user emails are unique
+    async postRegister(req, res, next){
+        try {
+            //user register with a new username and we are pulling the username from the form
+            //the we pass the password as the second parameter, which then takes the password
+            //hashes and salts it.
+            //wait for user.register to finish running until we redirect back
+            //home
+            //await will not work unless we have a asynch function that it is inside
+            //of (await is only valid in async function)
+            const user = await User.register(new User(req.body), req.body.password);
+            req.login(user, function(err) {
+                console.log('ERROR ERROR ERROR ERROR');
+                if(err) return next(err);
+                req.session.success = `Welcome to Surf Shop, ${user.username}!`;
+                res.redirect('/');
+            });
+        } catch(err) {
+            //console.log('ERROR ERROR ERROR ERROR');
+            // passport local mongoose will check for same username
+            const {username, email } = req.body; // destructoring som variables
+            let error = err.message;
+            if (error.includes('duplicate') && error.includes('index: email_1 dup key')){
+                error = 'A yser with the given email is already registered';
             }
-            req.session.success = `Welcome to Surf Shop, ${user.username}!`;
-            res.redirect('/');
-        });
+            // re render the register page. Our flash messages currently work by detecting the error
+            // variable and displaying a flash message. 
+            res.render('register', { title: 'Register', username, email, error});
+        }
+
+        
+       
+        
         
     },
 
@@ -48,12 +67,18 @@ module.exports = {
     },
 
     //POST /login
-    postLogin(req, res, next){
-        passport.authenticate('local', 
-                { successRedirect: '/',
-                failureRedirect: '/login',
-               // failureFlash: true 
-        })(req, res, next);
+    async postLogin(req, res, next){
+       const { usernname, password } = req.body;
+       // higher order function that has a function inside of it that it is returning and passing in what it is returning
+       const { user, error } = User.authenticate()(username, password);
+       if (!user && error) return next(error);
+       req.login(user, function(err){
+           if (err) return next(err);
+           req.seesion.success = `Welcome back, ${username}!`;
+           const redirectUrl = req.session.redirectTo || '/';
+           delete req.session.redirectTo;
+           res.redirect(redirectUrl);
+       });
     },
 
     // GET /logout

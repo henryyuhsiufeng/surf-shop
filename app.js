@@ -5,6 +5,7 @@ const createError             = require('http-errors'),
       engine                  = require('ejs-mate'),
       path                    = require('path'),
       cookieParser            = require('cookie-parser'),
+      favicon                 = require('serve-favicon'),
       logger                  = require('morgan'),
       bodyParser              = require('body-parser'),
       passport                = require('passport'),
@@ -35,6 +36,7 @@ db.once('open', () => {
   console.log('we\'re connected');
 });
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 // view engine setup
@@ -42,6 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // setup piblic assets directory. Static files will contain images, sounds, etc
 app.use(express.static('public'));
+
 
 app.use(logger('dev'));
 app.use(express.json());

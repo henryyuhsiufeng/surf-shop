@@ -14,7 +14,7 @@ const {landingPage,
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
-const { asyncErrorHandler} = require('../middleware');
+const { asyncErrorHandler, isLoggedIn } = require('../middleware');
 
 
 // index.js uses es6 formatting 
@@ -34,7 +34,7 @@ router.post('/register', asyncErrorHandler(postRegister));
 router.get('/login',getLogin);
 
 /* POST /login home page. */
-router.post('/login', postLogin);
+router.post('/login', asyncErrorHandler(postLogin));
 
 /* GET /logout */
 router.get('/logout', getLogout);

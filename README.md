@@ -1,5 +1,9 @@
 ################ surf-shop ################
+7/13/19
+
 7/10/19
+## 
+
 ## CONTINUE USER AUTHENTICATION AND AUTHORIZATION
 # Create Register and Login Views
 - Create a new file inside of /views named register.ejs

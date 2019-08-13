@@ -3,7 +3,8 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    email: String,
+    // if not unique then we catch it as an error and write a custom error message
+    email: { type: String, unique: true, required: true },
     image: String
 });
 
