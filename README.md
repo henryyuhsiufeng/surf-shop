@@ -5,6 +5,10 @@
 ## Add isAuthor Middleware
 - We should have an author pointing to an id and let the application populate the author based on the id
 
+## Update UI and test
+- If user is already logged in, they shouldn't see the login button
+- There is already a middleware that checks user auth, but we don't want incorrect users to even reach the middleware point. This issue will be resolved by hiding the buttons. 
+
 
 
 7/13/19

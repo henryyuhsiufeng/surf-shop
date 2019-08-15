@@ -13,8 +13,8 @@ const createError             = require('http-errors'),
       session                 = require('express-session'),
       mongoose                = require('mongoose'),
       methodOverride          = require('method-override');
-      seedPosts               = require('./seeds');
-      seedPosts();
+      // seedPosts               = require('./seeds');
+      // seedPosts();
 
 
       
