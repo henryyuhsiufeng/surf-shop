@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { asyncErrorHandler, isLoggedIn } = require('../middleware');
+const { asyncErrorHandler, isLoggedIn, isAuthor } = require('../middleware');
 const multer = require('multer');
 
 // uploads directory is where the files will be stored temporarily before
@@ -40,13 +40,13 @@ router.post('/', isLoggedIn ,upload.array('images', 4), asyncErrorHandler(postCr
 router.get('/:id', asyncErrorHandler(postShow));
 
 /* GET posts edit /posts/:id/edit */
-router.get('/:id/edit', asyncErrorHandler(postEdit));
+router.get('/:id/edit',asyncErrorHandler(isAuthor), asyncErrorHandler(postEdit));
 
 /* PUT posts update /posts/:id */
-router.put('/:id', upload.array('images', 4), asyncErrorHandler(postUpdate));
+router.put('/:id', asyncErrorHandler(isAuthor), upload.array('images', 4), asyncErrorHandler(postUpdate));
 
 /* DELETE posts destroy /posts/:id */
-router.delete('/:id', asyncErrorHandler(postDestroy));
+router.delete('/:id', asyncErrorHandler(isAuthor), asyncErrorHandler(postDestroy));
 
 
 module.exports = router;
