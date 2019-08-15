@@ -38,10 +38,10 @@ module.exports = {
             const user = await User.register(new User(req.body), req.body.password);
             //if(User.find().email)
             //console.log( User.count({ email: req.body.email}));
-            if(User.find({"email":req.body.email}).count()!=0){
-                err.message = 'duplicate index: email_1 dup key';
-                return next(err);
-            }
+            // if(User.find({"email":req.body.email}).count()!=0){
+            //     err.message = 'duplicate index: email_1 dup key';
+            //     return next(err);
+            // }
             req.login(user, function(err) {
                 const {username, email } = req.body;
                 console.log(username+' '+email);
@@ -54,6 +54,7 @@ module.exports = {
             // passport local mongoose will check for same username
             const {username, email } = req.body; // destructoring som variables
             let error = err.message;
+            //eval(require('locus'))
             if (error.includes('duplicate') && error.includes('index: email_1 dup key')){
                 error = 'A user with the given email is already registered';
             }

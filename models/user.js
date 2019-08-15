@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     // if not unique then we catch it as an error and write a custom error message
-    email: { type: String, unique: true, required: true },
+    email: { type: String, require: true, unique: true },
     image: String
 });
 
