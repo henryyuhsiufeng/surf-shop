@@ -2,7 +2,8 @@
 7/15/19
 - Fixed the issue with duplicate email. It should be require not required
 - If user inputs both a username and email that is already used, username error will first appear because passport checks for unique username first. 
-##
+## Add isAuthor Middleware
+- We should have an author pointing to an id and let the application populate the author based on the id
 
 
 

@@ -13,8 +13,8 @@ const createError             = require('http-errors'),
       session                 = require('express-session'),
       mongoose                = require('mongoose'),
       methodOverride          = require('method-override');
-      // seedPosts               = require('./seeds');
-      // seedPosts();
+      seedPosts               = require('./seeds');
+      seedPosts();
 
 
       
@@ -36,7 +36,7 @@ db.once('open', () => {
   console.log('we\'re connected');
 });
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 // view engine setup
