@@ -21,12 +21,14 @@ module.exports = {
 		req.session.error = "Bye Bye";
 		return res.redirect('/');
 	},
-	isLoggedIn: () => {
-		if (res.isAuthenticated()) return next();
+
+	isLoggedIn: (req, res, next) => {
+		if (req.isAuthenticated()) return next();
 		req.session.error = 'You need to be logged in to do that!';
 		req.session.redirectTo = req.originalUrl;
 		res.redirect('login');
 	},
+
 	isAuthor: async (req, res, next) => {
 		 const post = await Post.findById(req.params.id);
 		 if(post.author.equals(req.user._id)){

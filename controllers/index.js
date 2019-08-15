@@ -78,9 +78,9 @@ module.exports = {
 
     //POST /login
     async postLogin(req, res, next){
-       const { usernname, password } = req.body;
+       const { username, password } = req.body;
        // higher order function that has a function inside of it that it is returning and passing in what it is returning
-       const { user, error } = User.authenticate()(username, password);
+       const { user, error } = await User.authenticate()(username, password);
        if (!user && error) return next(error);
        req.login(user, function(err){
            if (err) return next(err);
