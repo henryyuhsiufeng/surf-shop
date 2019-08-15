@@ -60,6 +60,8 @@ module.exports = {
             .send();
         // create variable in post called coordinates that stores the coordinate location from the form
         req.body.post.geometry = response.body.features[0].geometry;
+        // we are storing the id as the author property and whenever we find the post we can use that id to populate that author
+        req.body.post.author = req.user._id;
         let post = new Post(req.body.post);
 		post.properties.description = `<strong><a href="/posts/${post._id}">${post.title}</a></strong><p>${post.location}</p><p>${post.description.substring(0, 20)}...</p>`;
 		post.save();
@@ -84,15 +86,18 @@ module.exports = {
     },
     // Posts Edit
     async postEdit(req, res, next){
-        let post = await Post.findById(req.params.id);
-        res.render('posts/edit', {  post });
+        // let post = await Post.findById(req.params.id);
+        // the res.locals.post gets sent all the way to the render function so it will be available to us as a local variable
+        res.render('posts/edit');
     },
     // Posts Update
     // take information from the put request in the edit form, then we will find
     // the post by its id and update it, then redirect. 
     async postUpdate(req, res, next){
-        // Find the post by id
-        let post = await Post.findById(req.params.id);
+            // Find the post by id
+            // let post = await Post.findById(req.params.id);
+        // destructure post from res.locals
+        const { post } = res.locals;
         // Check if there's any images for deletion
         //check if deleteImages exist and if length is 0 (because 0 is falsey)
         if(req.body.deleteImages && req.body.deleteImages.length) {
@@ -160,7 +165,9 @@ module.exports = {
     },
     // Post Destroy
     async postDestroy(req, res, next){
-        let post = await Post.findByIdAndRemove(req.params.id);
+        // find by id is no longer needed due to isAuth middleware
+        //let post = await Post.findByIdAndRemove(req.params.id);
+        const { post } = res.locals;
         // iterate over post.images and extract the public id
         // image represents each of the objects in post.images array.
         for(const image of post.images) {
