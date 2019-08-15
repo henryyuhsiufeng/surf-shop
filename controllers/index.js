@@ -12,7 +12,7 @@ module.exports = {
     },
     // GET /register
     getRegister(req, res, next) {
-        res.render('register', {title: 'register' });
+        res.render('register', {title: 'register', username: '', email: ''});
     },
 
     //create a method that we can use with post register route in user index
@@ -36,8 +36,15 @@ module.exports = {
             //await will not work unless we have a asynch function that it is inside
             //of (await is only valid in async function)
             const user = await User.register(new User(req.body), req.body.password);
+            //if(User.find().email)
+            //console.log( User.count({ email: req.body.email}));
+            if(User.find({"email":req.body.email}).count()!=0){
+                err.message = 'duplicate index: email_1 dup key';
+                return next(err);
+            }
             req.login(user, function(err) {
-                console.log('ERROR ERROR ERROR ERROR');
+                const {username, email } = req.body;
+                console.log(username+' '+email);
                 if(err) return next(err);
                 req.session.success = `Welcome to Surf Shop, ${user.username}!`;
                 res.redirect('/');
@@ -48,7 +55,7 @@ module.exports = {
             const {username, email } = req.body; // destructoring som variables
             let error = err.message;
             if (error.includes('duplicate') && error.includes('index: email_1 dup key')){
-                error = 'A yser with the given email is already registered';
+                error = 'A user with the given email is already registered';
             }
             // re render the register page. Our flash messages currently work by detecting the error
             // variable and displaying a flash message. 

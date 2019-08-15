@@ -1,5 +1,12 @@
 ################ surf-shop ################
+7/15/19
+- If user inputs both a username and email that is already used, username error will first appear because passport checks for unique username first. 
+##
+
+
+
 7/13/19
+##Update postRegister, add email validation
 
 7/10/19
 ## 
