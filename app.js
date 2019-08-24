@@ -7,7 +7,7 @@ const createError             = require('http-errors'),
       cookieParser            = require('cookie-parser'),
       favicon                 = require('serve-favicon'),
       logger                  = require('morgan'),
-      bodyParser              = require('body-parser'),
+      //bodyParser              = require('body-parser'),
       passport                = require('passport'),
       User                    = require('./models/user'),
       session                 = require('express-session'),
@@ -28,7 +28,10 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/surf-shop', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/surf-shop', {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -44,7 +47,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // setup piblic assets directory. Static files will contain images, sounds, etc
 app.use(express.static('public'));
-
 
 app.use(logger('dev'));
 app.use(express.json());

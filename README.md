@@ -1,4 +1,16 @@
 ################ surf-shop ################
+7/24/19
+## Housekeeping - Bug Fixes and Update
+- Update npm
+- Update npm packages
+    - npm install -g npm-check-updates
+    - ncu --upgradeAll
+    - npm update
+- Update mongoose.connect()
+- Remove body-parser
+- Remove async from postEdit method
+- Change price input to number type
+
 7/15/19
 - Fixed the issue with duplicate email. It should be require not required
 - If user inputs both a username and email that is already used, username error will first appear because passport checks for unique username first. 

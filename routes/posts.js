@@ -42,7 +42,7 @@ router.get('/:id', asyncErrorHandler(postShow));
 
 //isAuthor requires that a user isLoggedIn
 /* GET posts edit /posts/:id/edit */
-router.get('/:id/edit', isLoggedIn, asyncErrorHandler(isAuthor), asyncErrorHandler(postEdit));
+router.get('/:id/edit', isLoggedIn, asyncErrorHandler(isAuthor), postEdit);
 
 /* PUT posts update /posts/:id */
 router.put('/:id', isLoggedIn, asyncErrorHandler(isAuthor), upload.array('images', 4), asyncErrorHandler(postUpdate));

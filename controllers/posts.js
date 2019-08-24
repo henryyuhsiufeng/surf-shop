@@ -85,7 +85,7 @@ module.exports = {
 		res.render('posts/show', { post, mapBoxToken, floorRating });
     },
     // Posts Edit
-    async postEdit(req, res, next){
+    postEdit(req, res, next){
         // let post = await Post.findById(req.params.id);
         // the res.locals.post gets sent all the way to the render function so it will be available to us as a local variable
         res.render('posts/edit');
