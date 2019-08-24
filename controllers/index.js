@@ -73,6 +73,10 @@ module.exports = {
     getLogin(req, res, next) {
         // isAuth is from passport
         if(req.isAuthenticated()) return res.redirect('/');
+        // if exist then we need to take the url where the request is coming from 
+        // and use that in our session so that the user gets redirected back after they
+        // successfully login
+        if(req.query.returnTo) req.session.redirectTo = req.headers.referer;
         res.render('login', {title: 'Login' });
     },
 
@@ -84,7 +88,8 @@ module.exports = {
        if (!user && error) return next(error);
        req.login(user, function(err){
            if (err) return next(err);
-           req.seesion.success = `Welcome back, ${username}!`;
+           req.session.success = `Welcome back, ${username}!`;
+           // req.session.redirectTo from getLogin 
            const redirectUrl = req.session.redirectTo || '/';
            delete req.session.redirectTo;
            res.redirect(redirectUrl);
