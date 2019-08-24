@@ -10,10 +10,14 @@
 - Remove body-parser
 - Remove async from postEdit method
 - Change price input to number type
-##Housekeeping - Bug Fixes and Updates Pt. 2
+## Housekeeping - Bug Fixes and Updates Pt. 2
 - Update number inputs (again, "D'oh!")
 - Update postUpdate method
 - Update postUpdate method
+## User Profile Pt.1
+- Create profile view
+- Update index routes with getProfile method
+- Add getProfile method to index controller
 
 7/15/19
 - Fixed the issue with duplicate email. It should be require not required

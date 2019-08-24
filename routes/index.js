@@ -10,7 +10,9 @@ const {landingPage,
       postRegister, 
       postLogin, 
       getLogin,
-      getLogout} = require('../controllers');
+      getLogout,
+      getProfile
+    } = require('../controllers');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
@@ -41,9 +43,7 @@ router.get('/logout', getLogout);
 
 //Displays user profile information
 /* GET /profile home page. */
-router.get('/profile', (req, res, next) => {
-  res.send('GET /profile');
-});
+router.get('/profile', isLoggedIn, asyncErrorHandler(getProfile));
 
 //Update user profile information
 /* PUT /profile/:user_id home page. */
