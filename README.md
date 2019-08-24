@@ -18,6 +18,15 @@
 - Create profile view
 - Update index routes with getProfile method
 - Add getProfile method to index controller
+## User Profile Pt. 2 - 4
+- Update flash messages partial
+- Add classes to main stylesheet
+- Add profile link to navbar
+- Add update form to profile
+- Create profile.js file
+- Add isValidPassword and changePassword middleware
+- Add updateProfile method to index controller
+- Update Routes
 
 7/15/19
 - Fixed the issue with duplicate email. It should be require not required
