@@ -1,4 +1,16 @@
 ################ surf-shop ################
+7/27/19
+## User Profile Pt. 2 - 4 cont.
+
+7/26/19
+## User Profile Pt. 2 - 4 cont.
+- Add profile link to navbar
+- Add update form to profile
+- Create profile.js file
+- Add isValidPassword and changePassword middleware
+- Add updateProfile method to index controller
+- Update Routes
+
 7/24/19
 ## Housekeeping - Bug Fixes and Update
 - Update npm
@@ -21,12 +33,7 @@
 ## User Profile Pt. 2 - 4
 - Update flash messages partial
 - Add classes to main stylesheet
-- Add profile link to navbar
-- Add update form to profile
-- Create profile.js file
-- Add isValidPassword and changePassword middleware
-- Add updateProfile method to index controller
-- Update Routes
+
 
 7/15/19
 - Fixed the issue with duplicate email. It should be require not required
@@ -43,8 +50,7 @@
 7/13/19
 ##Update postRegister, add email validation
 
-7/10/19
-## 
+7/10/19 
 
 ## CONTINUE USER AUTHENTICATION AND AUTHORIZATION
 # Create Register and Login Views
