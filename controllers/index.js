@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const passport = require('passport');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
+const util = require('util');
 
 //anything inside this object will be exported
 module.exports = {
@@ -62,11 +63,6 @@ module.exports = {
             // variable and displaying a flash message. 
             res.render('register', { title: 'Register', username, email, error});
         }
-
-        
-       
-        
-        
     },
 
     // GET /login
@@ -106,6 +102,21 @@ module.exports = {
         // finds all the posts id's where the post author matches the logged author id
         const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
         res.render('profile', { posts });
+    },
+
+    async updateProfile(req, res, next) {
+        const {
+            username,
+            email,
+        } = req.body;
+        const { user } = res.locals;
+        if (username) user.username = username;
+        if (username) user.email= email;
+        await user.save();
+        const login = util.promisify(req.login.bind(req));
+        await login(user);
+        req.session.success = 'Profile successfully updated!';
+        res.redirect('/profile');
     }
 
 }

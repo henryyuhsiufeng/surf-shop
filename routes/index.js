@@ -11,12 +11,17 @@ const {landingPage,
       postLogin, 
       getLogin,
       getLogout,
-      getProfile
+      getProfile,
+      updateProfile
     } = require('../controllers');
     //an equivalent to ^^^^ that takes two lines
     //const indexObj = require('../controllers/index');
     //const postRegister = indexObj.postRegister;
-const { asyncErrorHandler, isLoggedIn } = require('../middleware');
+const { asyncErrorHandler,
+        isLoggedIn,
+        isValidPassword,
+        changePassword
+   } = require('../middleware');
 
 
 // index.js uses es6 formatting 
@@ -46,10 +51,12 @@ router.get('/logout', getLogout);
 router.get('/profile', isLoggedIn, asyncErrorHandler(getProfile));
 
 //Update user profile information
-/* PUT /profile/:user_id home page. */
-router.put('/profile/:user_id', (req, res, next) => {
-  res.send('PUT /profile/:user_id');
-});
+/* PUT /profile/ */
+router.put('/profile/',
+            isLoggedIn,
+            asyncErrorHandler(isValidPassword),
+            asyncErrorHandler(changePassword),
+            asyncErrorHandler(updateProfile));
 
 /* GET /forgot home page. */
 router.get('/forgot', (req, res, next) => {
